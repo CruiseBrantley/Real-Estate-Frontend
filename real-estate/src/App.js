@@ -49,6 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Real Estate Value Calculator</h1>
         <div className="main-container">
           <div className="left-column">
             <SqftInput
@@ -91,11 +92,13 @@ class App extends Component {
               name="Floors"
               rooms={this.state.floors}
             />
+            <br />
             <SmallValues
               callback={this.changeBedrooms}
               name="Bedrooms"
               rooms={this.state.numberBedrooms}
             />
+            <br />
             <SmallValues
               callback={this.changeBathrooms}
               name="Bathrooms"
