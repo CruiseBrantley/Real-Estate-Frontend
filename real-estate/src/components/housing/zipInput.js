@@ -21,7 +21,7 @@ class ZipInput extends React.Component {
             {this.props.name}
           </InputGroupAddon>
           <Input
-            placeholder="ZIP"
+            placeholder={this.props.placeholder}
             name="zip"
             value={this.state.zip}
             onChange={e => this.onChangeInput(e)}
