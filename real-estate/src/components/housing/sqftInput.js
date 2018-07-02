@@ -5,13 +5,21 @@ import {InputGroup, Input, InputGroupAddon} from "reactstrap/";
 
 class sqftInput extends React.Component {
 
+    state = {
+        sqrt: 1500
+    };
+
+    onChangeInput = event => {
+        this.setState({[event.target.name]: event.target.value})
+
+    };
     render() {
         return (
             <div>
                 <label>{this.props.name}</label>
 
                 <InputGroup>
-                    <Input placeholder="Amount" type="number" step="1" />
+                    <Input placeholder="Amount" name="sqrt" type="number" step="20" value={this.state.sqrt} onChange={this.onChangeInput}/>
                     <InputGroupAddon addonType="append">SQFT</InputGroupAddon>
                 </InputGroup>
 
