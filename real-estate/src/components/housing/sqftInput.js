@@ -25,11 +25,9 @@ class sqftInput extends React.Component {
             type="number"
             step="20"
             value={this.state.sqft}
-            onChange={e => {
-              this.onChangeInput(e);
-            }}
+            onChange={e => this.onChangeInput(e)}
           />
-          <InputGroupAddon addonType="append">SQFT</InputGroupAddon>
+          <InputGroupAddon addonType="append">squarefeet</InputGroupAddon>
         </InputGroup>
       </div>
     );
