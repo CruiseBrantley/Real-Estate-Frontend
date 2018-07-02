@@ -3,7 +3,9 @@ import "./CSS/App.css";
 import SqftInput from "./components/housing/sqftInput";
 import ZipInput from "./components/housing/zipInput";
 import SmallValues from "./components/housing/smallValues";
-import Checkbox from "./components/housing/checkbox";
+import { Button } from "reactstrap";
+import axios from "axios";
+import cors from "cors";
 
 class App extends Component {
   state = {
@@ -44,6 +46,25 @@ class App extends Component {
   };
   changeGrade = value => {
     this.setState({ grade: value });
+  };
+  submitButton = () => {
+    axios
+      .post("address to test", {
+        liveableSqft: this.state.liveableSqft,
+        lotSqft: this.state.lotSqft,
+        numberBathrooms: this.state.numberBathrooms,
+        numberBedrooms: this.state.numberBedrooms,
+        floors: this.state.floors,
+        condition: this.state.condition,
+        grade: this.state.grade,
+        yearBuilt: this.state.yearBuilt,
+        zip: this.state.zip
+      })
+      .then(response => {
+        if (response) {
+          console.log(response);
+        } else console.log("Something went wrong.");
+      });
   };
 
   render() {
@@ -107,6 +128,9 @@ class App extends Component {
           </div>
           {/* <Checkbox callback={this.changeGarage} name="Garage" /> */}
         </div>
+        <Button color="primary" onClick={e => this.submitButton()}>
+          Submit
+        </Button>
       </div>
     );
   }

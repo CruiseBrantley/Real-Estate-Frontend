@@ -1,5 +1,5 @@
 import React from "react";
-import { InputGroup, Button, ButtonGroup, InputGroupAddon } from "reactstrap/";
+import { InputGroup, Button, ButtonGroup } from "reactstrap/";
 import "../../CSS/smallValues.css";
 
 class SmallValues extends React.Component {
