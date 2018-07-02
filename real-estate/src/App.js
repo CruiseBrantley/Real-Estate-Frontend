@@ -3,8 +3,10 @@ import logo from "./logo.svg";
 import "./CSS/App.css";
 import SqftInput from "./components/housing/sqftInput";
 import ZipInput from "./components/housing/zipInput";
+import SmallValues from "./components/housing/smallValues";
 import Checkbox from "./components/housing/checkbox";
 import { Button } from "reactstrap";
+import smallValues from "./components/housing/smallValues";
 class App extends Component {
   state = {
     liveableSqft: 1500,
@@ -27,6 +29,12 @@ class App extends Component {
   };
   changeGarage = value => {
     this.setState({ garage: value });
+  };
+  changeBedrooms = value => {
+    this.setState({ numberBedrooms: value });
+  };
+  changeBathrooms = value => {
+    this.setState({ numberBathrooms: value });
   };
   changeZip = value => {
     this.setState({ zip: value });
@@ -51,6 +59,8 @@ class App extends Component {
             zip={this.state.zip}
             callback={this.changeZip}
           />
+          <SmallValues callback={this.changeBedrooms} name="Bedrooms" />
+          <SmallValues callback={this.changeBathrooms} name="Bathrooms" />
           <Checkbox callback={this.changeGarage} name="Garage" />
         </div>
       </div>
