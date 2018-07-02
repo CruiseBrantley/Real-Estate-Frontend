@@ -1,6 +1,7 @@
 import React from "react";
 import { InputGroup, Input, InputGroupAddon } from "reactstrap/";
 import "../../CSS/SqftInput.css";
+import "../../CSS/zip.css";
 
 class ZipInput extends React.Component {
   state = {
@@ -22,7 +23,6 @@ class ZipInput extends React.Component {
           <Input
             placeholder="ZIP"
             name="zip"
-            type="number"
             value={this.state.zip}
             onChange={e => this.onChangeInput(e)}
           />

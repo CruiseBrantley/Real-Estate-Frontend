@@ -59,8 +59,16 @@ class App extends Component {
             zip={this.state.zip}
             callback={this.changeZip}
           />
-          <SmallValues callback={this.changeBedrooms} name="Bedrooms" />
-          <SmallValues callback={this.changeBathrooms} name="Bathrooms" />
+          <SmallValues
+            callback={this.changeBedrooms}
+            name="Bedrooms"
+            rooms={this.state.numberBedrooms}
+          />
+          <SmallValues
+            callback={this.changeBathrooms}
+            name="Bathrooms"
+            rooms={this.state.numberBathrooms}
+          />
           <Checkbox callback={this.changeGarage} name="Garage" />
         </div>
       </div>
