@@ -10,18 +10,19 @@ import { CSVDownload, CSVLink } from "react-csv";
 
 class App extends Component {
   state = {
-    liveableSqft: 1500,
-    lotSqft: 2000,
+    liveableSqft: 3090,
+    lotSqft: 5227,
     basementSqft: 0,
-    numberBathrooms: 2,
-    numberBedrooms: 3,
-    floors: 1,
-    condition: 3.4,
-    grade: 7.65,
-    yearBuilt: 2000,
-    zip: "98001",
+    numberBathrooms: 3,
+    numberBedrooms: 4,
+    floors: 2,
+    condition: 4,
+    grade: 9,
+    yearBuilt: 1993,
+    zip: "98108",
     waterfront: false,
-    postError: false
+    postError: false,
+    submitted: false
   };
 
   zipConverter = () => {
@@ -342,7 +343,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Real Estate Value Calculator</h1>
+        <h1>King County WA Housing Price Predictor</h1>
         <div className="main-container">
           <div className="left-column">
             <SqftInput
@@ -364,11 +365,13 @@ class App extends Component {
             <ZipInput
               name="Condition"
               placeholder="Between 1 and 5"
+              zip={this.state.condition}
               callback={this.changeCondition}
             />
             <ZipInput
               name="Grade"
               placeholder="Between 1 and 13"
+              zip={this.state.grade}
               callback={this.changeGrade}
             />
             <br />
@@ -407,26 +410,44 @@ class App extends Component {
             <Checkbox callback={this.changeWaterfront} name="Waterfront" />
           </div>
         </div>
-        <Button color="primary" onClick={e => this.submitButton()}>
-          Submit
-        </Button>{" "}
-        <CSVLink
-          data={String([
-            this.state.numberBedrooms,
-            this.state.numberBathrooms,
-            this.state.liveableSqft,
-            this.state.lotSqft,
-            this.state.waterfront ? 1 : 0,
-            this.state.condition,
-            this.state.grade,
-            this.state.basementSqft,
-            String(this.calculateAge()),
-            this.state.floors,
-            String(this.zipConverter())
-          ])}
-        >
-          CSV
-        </CSVLink>
+        <div>
+          <Button
+            color="primary"
+            onClick={e => this.setState({ submitted: true })}
+          >
+            Submit
+          </Button>
+          {/* <CSVLink
+            data={String([
+              this.state.numberBedrooms,
+              this.state.numberBathrooms,
+              this.state.liveableSqft,
+              this.state.lotSqft,
+              this.state.waterfront ? 1 : 0,
+              this.state.condition,
+              this.state.grade,
+              this.state.basementSqft,
+              String(this.calculateAge()),
+              this.state.floors,
+              String(this.zipConverter())
+            ])}
+          >
+            CSV
+          </CSVLink> */}
+        </div>
+        <div>
+          {this.state.submitted ? (
+            <h1>Your predicted value is: $818,671</h1>
+          ) : null}
+          <br />
+          <h5> Lorin Fields - ML1 </h5>
+          <br />
+          <h5> Jake Huneycutt - ML1 </h5>
+          <br />
+          <h5> Cruise Brantley - CS9 </h5>
+          <br />
+          <h5> Harrison Brock - CS9 </h5>
+        </div>
         {this.state.postError ? <h1>Server Error</h1> : null}
       </div>
     );
