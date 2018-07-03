@@ -5,7 +5,6 @@ import ZipInput from "./components/housing/zipInput";
 import SmallValues from "./components/housing/smallValues";
 import { Button } from "reactstrap";
 import axios from "axios";
-import cors from "cors";
 
 class App extends Component {
   state = {
@@ -49,17 +48,80 @@ class App extends Component {
   };
   submitButton = () => {
     axios
-      .post("address to test", {
-        liveableSqft: this.state.liveableSqft,
-        lotSqft: this.state.lotSqft,
-        numberBathrooms: this.state.numberBathrooms,
-        numberBedrooms: this.state.numberBedrooms,
-        floors: this.state.floors,
-        condition: this.state.condition,
-        grade: this.state.grade,
-        yearBuilt: this.state.yearBuilt,
-        zip: this.state.zip
-      })
+      .post(
+        "https://ussouthcentral.services.azureml.net/workspaces/cffb0d7e204b476e8d88fd1c4003466d/services/79f2996384914372a416c2c5d17154a6/execute?api-version=2.0&details=true",
+        {
+          Results: {
+            output1: {
+              type: "DataTable",
+              value: {
+                ColumnNames: [
+                  "price",
+                  "bedrooms",
+                  "bathrooms",
+                  "sqft_living",
+                  "sqft_lot",
+                  "floors",
+                  "condition",
+                  "grade",
+                  "yr_built",
+                  "zipcode",
+                  "Scored Labels"
+                ],
+                ColumnTypes: [
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric",
+                  "Numeric"
+                ],
+                Values: [
+                  [
+                    "0",
+                    this.state.numberBedrooms,
+                    this.state.numberBathrooms,
+                    this.state.liveableSqft,
+                    this.state.lotSqft,
+                    this.state.floors,
+                    this.state.condition,
+                    this.state.grade,
+                    this.state.yearBuilt,
+                    this.state.zip,
+                    "0"
+                  ],
+                  [
+                    "0",
+                    this.state.numberBedrooms,
+                    this.state.numberBathrooms,
+                    this.state.liveableSqft,
+                    this.state.lotSqft,
+                    this.state.floors,
+                    this.state.condition,
+                    this.state.grade,
+                    this.state.yearBuilt,
+                    this.state.zip,
+                    "0"
+                  ]
+                ]
+              }
+            }
+          }
+        },
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              "fFqRbyLVg1mvDQFkr5Pkz+ZMAnD+HleF8hAjtXd9SMbtMQIf2Fu1w/BZy55srDlnsFSeqcXCLYVzRPMOXoaHpw==",
+            "Content-Type": "application/json"
+          }
+        }
+      )
       .then(response => {
         if (response) {
           console.log(response);
